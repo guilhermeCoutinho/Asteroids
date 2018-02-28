@@ -16,9 +16,16 @@ public class PlayerInput : MonoBehaviour {
 			return rotation ;
 		}
 	}
+	bool fireButtonPressed;
+	public bool FirebuttonPressed {
+		get { 
+			return fireButtonPressed;
+		}
+	}
 
 	void Update () {
 		thrust =  Mathf.Clamp01 ( Input.GetAxis("Vertical") );
 		rotation = Input.GetAxis("Horizontal");
+		fireButtonPressed = Input.GetButton("Fire1");
 	}
 }
