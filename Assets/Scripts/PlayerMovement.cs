@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerMovement : MonoBehaviour {
 	public float driveForce;
+	public float maxSpeed;
 	[Range(0,1)]
 	public float slowingFactor = .9f;
 	public float rotateSpeed;
@@ -16,7 +17,6 @@ public class PlayerMovement : MonoBehaviour {
 		rb= GetComponent<Rigidbody2D> ();
 		pInput = GetComponent<PlayerInput>();
 	}
-
 	void FixedUpdate( ) {
 		applyTrhust ();
 		applyRotation();
@@ -30,8 +30,15 @@ public class PlayerMovement : MonoBehaviour {
 		rb.velocity *= slowingFactor;
 		if (pInput.Thrust > 0) {
 			currentSpeed = rb.velocity.magnitude;
-			float propulsion = driveForce * pInput.Thrust - (Mathf.Clamp(currentSpeed, 0f, driveForce));
+			float propulsion = driveForce * pInput.Thrust;
 			rb.AddForce(propulsion * transform.up, ForceMode2D.Force);
 		}
+		clampVelocity () ;
+	}
+
+	void clampVelocity () {
+		var v = rb.velocity;
+        if (v.magnitude > maxSpeed)
+            rb.velocity = v.normalized * maxSpeed;
 	}
 }
