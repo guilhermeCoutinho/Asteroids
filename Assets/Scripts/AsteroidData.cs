@@ -8,4 +8,5 @@ public class AsteroidData
 	public Sprite[] sprites;
 	public int life;
 	public float mass;
+	public int pointsForDestroying;
 }

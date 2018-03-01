@@ -46,6 +46,7 @@ public class Bullet : MonoBehaviour {
             init();
 			life.TakeDamage (1);
 			hitPool.getObject().GetComponent<HitEffect>().Hit(transform.position);
+			AudioManager.PlayOneShot(AudioManager.Instance.bulletHits);
             pool.returnObject(gameObject);
 		}
 	}

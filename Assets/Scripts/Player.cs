@@ -9,6 +9,10 @@ public class Player : Singleton<Player> , ILife {
     public GameObject gfx;
     public Text lifeText;
 
+    public Text scoreText;
+
+    int score;
+
     bool hasImunity;
     float timeTillImunityRunsOut;
 
@@ -19,20 +23,27 @@ public class Player : Singleton<Player> , ILife {
     }
 
     void Start () {
-        UpdateText ();
+        updateLife ();
+        updateScore();
+        score = 0;
     }
 
-    void UpdateText () {
+    void updateLife () {
         lifeText.text = "x" + life;
+    }
+
+    void updateScore () {
+        scoreText.text = score.ToString() .PadLeft(10,'0');
     }
 
     public void TakeDamage (int qtd) {
         if (hasImunity)
             return;
+        AudioManager.PlayOneShot(AudioManager.Instance.playerTakesDamage);
         rb.velocity = Vector3.zero;
         StartCoroutine(immunity());
         life -= qtd;
-        UpdateText ();
+        updateLife ();
     }
 
     IEnumerator immunity()
@@ -47,5 +58,10 @@ public class Player : Singleton<Player> , ILife {
         }
         gfx.SetActive(true);
         hasImunity = false;
+    }
+
+    public void Score (int amount) {
+        score += amount;
+        updateScore ();
     }
 }

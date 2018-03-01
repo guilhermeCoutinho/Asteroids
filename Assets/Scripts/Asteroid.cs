@@ -14,6 +14,7 @@ public class Asteroid : MonoBehaviour , ILife {
 	Size size;
 	ObjectPool pool;
 	BoxCollider2D col;
+	AsteroidData data;
 	
 	UnityAction<Size,Vector2> onAsteroidDied;
 
@@ -27,6 +28,7 @@ public class Asteroid : MonoBehaviour , ILife {
 
 	public void Setup ( AsteroidData data , Size size , UnityAction<Size,Vector2> onAsteroidDied) {
 		spriteRenderer.sprite = data.sprites[Random.Range(0,data.sprites.Length)];
+		this.data = data;
 		recalculateCollider ();
 		rb.mass = data.mass;
 		this.life = data.life;
@@ -54,6 +56,8 @@ public class Asteroid : MonoBehaviour , ILife {
 	}
 
 	void Die () {
+		if (data != null)
+			Player.Instance.Score (data.pointsForDestroying);
 		rb.velocity = Vector2.zero;
 		rb.rotation = 0;
 		if (onAsteroidDied != null)
@@ -70,7 +74,6 @@ public class Asteroid : MonoBehaviour , ILife {
 	void OnCollisionEnter2D (Collision2D col) {
 		if (col.gameObject.tag.Equals("Player")) {
 			col.gameObject.GetComponent<ILife>().TakeDamage(1);
-			TakeDamage(1);
 		}
 	}
 }

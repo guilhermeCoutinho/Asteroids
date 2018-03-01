@@ -36,8 +36,8 @@ public class FireWeapon : MonoBehaviour {
 				foreach (Transform t in Cannons)
 					fire(t);
 			}
-
 			readyToFireAgainTime = Time.time + fireCooldown;
+			AudioManager.PlayOneShot(AudioManager.Instance.playerShoots);
 		}
 	}
 
