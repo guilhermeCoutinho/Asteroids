@@ -69,7 +69,6 @@ public class ObjectPool : MonoBehaviour
             pool.Add(clonePoolElement);
             freeElementIndexes.Add(pool.IndexOf(clonePoolElement));
         }
-        Debug.Log ("Pool capacity is now at " + pool.Count);
     }
 
 }

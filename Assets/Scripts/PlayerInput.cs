@@ -24,8 +24,8 @@ public class PlayerInput : MonoBehaviour {
 	}
 
 	void Update () {
-		thrust =  Mathf.Clamp01 ( Input.GetAxis("Vertical") );
-		rotation = Input.GetAxis("Horizontal");
+		thrust =  Mathf.Clamp01 ( Input.GetAxisRaw("Vertical") );
+		rotation = Input.GetAxisRaw("Horizontal");
 		fireButtonPressed = Input.GetButton("Fire1");
 	}
 }

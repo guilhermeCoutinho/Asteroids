@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour {
 	[Range(0,1)]
 	public float slowingFactor = .9f;
 	public float rotateSpeed;
-	float currentSpeed;
     Rigidbody2D rb;
     PlayerInput pInput;
 
@@ -29,7 +28,6 @@ public class PlayerMovement : MonoBehaviour {
 	void applyTrhust () {
 		rb.velocity *= slowingFactor;
 		if (pInput.Thrust > 0) {
-			currentSpeed = rb.velocity.magnitude;
 			float propulsion = driveForce * pInput.Thrust;
 			rb.AddForce(propulsion * transform.up, ForceMode2D.Force);
 		}

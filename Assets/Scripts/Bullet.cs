@@ -32,4 +32,15 @@ public class Bullet : MonoBehaviour {
 		if (isAlive && Time.time > deathTime)
 			pool.returnObject(gameObject);
 	}
+
+	void OnTriggerEnter2D (Collider2D col) {
+		ILife life = col.GetComponent<ILife>();
+		if (life != null){
+			life.TakeDamage (1);
+			Debug.Log ("Pool is null " +  pool == null );
+            Debug.Log( "GO is null " + gameObject == null);
+
+            pool.returnObject(gameObject);
+		}
+	}
 }
