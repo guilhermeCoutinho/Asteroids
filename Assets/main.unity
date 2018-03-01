@@ -1211,7 +1211,7 @@ GameObject:
   - component: {fileID: 1978992896}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1359,6 +1359,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f257aa603e58b5d4b995d0bae5b81665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 5
+  imunityAfterBeingHit: 2
+  gfx: {fileID: 267045944}
+  lifeText: {fileID: 2019293133}
 --- !u!1 &2019293131
 GameObject:
   m_ObjectHideFlags: 0
