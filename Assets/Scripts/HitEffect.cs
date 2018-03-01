@@ -14,7 +14,7 @@ public class HitEffect : MonoBehaviour {
 	}
 
 	float timeToDestroySelf ;
-	bool shouldDestroySelf;
+	bool shouldDestroySelf = false;
 	ObjectPool pool ;
 
 
@@ -26,11 +26,14 @@ public class HitEffect : MonoBehaviour {
 		transform.position = position;
 		animator.SetTrigger("hit");
 		timeToDestroySelf = Time.time + 1;
+		shouldDestroySelf = true;
 	}
 
 	void Update () {
-		if (shouldDestroySelf && Time.time > timeToDestroySelf)
+		if (shouldDestroySelf && Time.time > timeToDestroySelf){
 			pool.returnObject(gameObject);
+			shouldDestroySelf = false;
+		}
 	}
 
 }

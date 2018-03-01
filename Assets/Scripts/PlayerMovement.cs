@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 	public float driveForce;
 	public float maxSpeed;
-	[Range(0,1)]
+	[Range(.9f,1)]
 	public float slowingFactor = .9f;
 	public float rotateSpeed;
     Rigidbody2D rb;
