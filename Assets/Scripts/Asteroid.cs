@@ -10,6 +10,7 @@ public class Asteroid : MonoBehaviour , ILife {
 	float life;
 	Rigidbody2D rb;
 	SpriteRenderer spriteRenderer;
+    BinkAnimation blinkAnimation;
 	Size size;
 	ObjectPool pool;
 	BoxCollider2D col;
@@ -18,6 +19,7 @@ public class Asteroid : MonoBehaviour , ILife {
 
 	void Awake () {
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		blinkAnimation = GetComponent<BinkAnimation>();
 		rb = GetComponent<Rigidbody2D>();
 		pool = GetComponentInParent<ObjectPool>();
         col = GetComponent<BoxCollider2D>();
@@ -44,6 +46,10 @@ public class Asteroid : MonoBehaviour , ILife {
 		life -= qtd;
 		if (life == 0) {
 			Die ();
+		}else if (life > 0) {
+			blinkAnimation.Blink ();
+		}else if (life < 0) {
+			Debug.Log ("Life < 0");
 		}
 	}
 

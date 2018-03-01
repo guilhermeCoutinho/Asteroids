@@ -40,7 +40,7 @@ public class AsteroidSpawner : MonoBehaviour {
 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Space)){
-			RandomSpawnAsteroid (200);
+			RandomSpawnAsteroid (5);
 		}
 	}
 

@@ -3,16 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-
     public float timeToLive;
 	Rigidbody2D rb;
 	bool isAlive = false;
 	ObjectPool pool ;
 	float deathTime;
+    ObjectPool hitPool;
 
 	void Awake () {
 		rb = GetComponent<Rigidbody2D>();
-		pool =GetComponentInParent<ObjectPool>();
+		init();
+	}
+
+	void init () {
+		if (pool == null)
+			pool = GetComponentInParent<ObjectPool>();
+		if (hitPool == null)
+	        hitPool = GameObject.FindWithTag("HitPool").GetComponent<ObjectPool>();
 	}
 
 	public void Fire (Vector2 origin , Vector2 direction, float Force) {
@@ -36,10 +43,9 @@ public class Bullet : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D col) {
 		ILife life = col.GetComponent<ILife>();
 		if (life != null){
+            init();
 			life.TakeDamage (1);
-			Debug.Log ("Pool is null " +  pool == null );
-            Debug.Log( "GO is null " + gameObject == null);
-
+			hitPool.getObject().GetComponent<HitEffect>().Hit(transform.position);
             pool.returnObject(gameObject);
 		}
 	}
