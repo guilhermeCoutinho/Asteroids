@@ -1,18 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : Singleton<Player> , ILife {
     public float life;
     public float imunityAfterBeingHit;
     public GameObject gfx;
-    public Text lifeText;
-
-    public Text scoreText;
-
     int score;
-
     bool hasImunity;
     float timeTillImunityRunsOut;
 
@@ -23,8 +17,6 @@ public class Player : Singleton<Player> , ILife {
     }
 
     void Start () {
-        updateLife ();
-        updateScore();
         score = 0;
     }
 
@@ -32,13 +24,6 @@ public class Player : Singleton<Player> , ILife {
         return score;
     }
 
-    void updateLife () {
-        lifeText.text = "x" + life;
-    }
-
-    void updateScore () {
-        scoreText.text = score.ToString() .PadLeft(10,'0');
-    }
 
     public void TakeDamage (int qtd) {
         if (hasImunity || !gameRunning())
@@ -47,7 +32,6 @@ public class Player : Singleton<Player> , ILife {
         rb.velocity = Vector3.zero;
         StartCoroutine(immunity());
         life -= qtd;
-        updateLife ();
     }
 
     IEnumerator immunity()
@@ -68,7 +52,6 @@ public class Player : Singleton<Player> , ILife {
         if (!gameRunning())
             return;
         score += amount;
-        updateScore ();
     }
 
     bool gameRunning () {

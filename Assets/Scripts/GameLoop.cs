@@ -8,15 +8,16 @@ public class GameLoop : MonoBehaviour {
 		PAUSED
 	}
 
-	public static GameState state = GameState.RUNNING;
+	public static GameState state;
 
 	public ObjectPool asteroidPool;
 	public AsteroidSpawner asteroidSpawner ;
 	public GameOverScreen gameOverScreen;
 
-	int spawnAmount = 0;
+	public int spawnAmount = 1;
+	public int asteroidIncreasePerLevel = 2;
 
-	public void StartGame () {
+	public void Start () {
 		state = GameState.RUNNING;
 	}
 
@@ -35,7 +36,8 @@ public class GameLoop : MonoBehaviour {
 				gameOverScreen.Activate();
             }
 			if (allAsteroidsAreDead()){
-				asteroidSpawner.RandomSpawnAsteroid (++spawnAmount);
+				asteroidSpawner.RandomSpawnAsteroid (spawnAmount);
+				spawnAmount += asteroidIncreasePerLevel;
 			}
 		}
 	}
