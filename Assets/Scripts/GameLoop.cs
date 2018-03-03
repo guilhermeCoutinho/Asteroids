@@ -12,6 +12,7 @@ public class GameLoop : MonoBehaviour {
 
 	public ObjectPool asteroidPool;
 	public AsteroidSpawner asteroidSpawner ;
+	public GameOverScreen gameOverScreen;
 
 	int spawnAmount = 0;
 
@@ -31,6 +32,7 @@ public class GameLoop : MonoBehaviour {
             if (isPlayerDead())
             {
                 state = GameState.PAUSED;
+				gameOverScreen.Activate();
             }
 			if (allAsteroidsAreDead()){
 				asteroidSpawner.RandomSpawnAsteroid (++spawnAmount);

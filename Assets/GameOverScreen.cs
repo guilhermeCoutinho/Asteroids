@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Text.RegularExpressions;
 using UnityEngine.UI;
 
@@ -19,30 +20,61 @@ public class GameOverScreen : Singleton<GameOverScreen> {
 	public Button confirmNameButton;
 	public int minNameLen;
 	public int maxNameLen;
+
+	CanvasGroup canvasGroup;
 	string playerName ;
 
 	State state ;
 	Coroutine flashTextCursorCoroutine;
 	bool showingCursor;
 
-	void Start () {
-		Activate();
-	}
-
 	public void Activate () {
-		state = State.WAITING_PLAYER_INPUT;
+		gameObject.SetActive (true);
+        canvasGroup = GetComponent<CanvasGroup>();
+		state = State.SETTING_UP;
+		firstPart.SetActive(true);
+		secondPart.SetActive(false);
 		SetPlayerName ( playerName = "" );
         flashTextCursorCoroutine = StartCoroutine(flashTextCursor());
+		confirmNameButton.gameObject.SetActive(false);
+		canvasGroup.alpha = 0;
+	}
+
+	public void GoToMenu () {
+		SceneManager.LoadScene("main_menu");
 	}
 
 	void Update () {
 		switch (state)
 		{
+			case State.SETTING_UP: 
+				FadeIn ();
+			break;
 			case State.WAITING_PLAYER_INPUT:
 				proccessPlayerInput();
 				confirmNameButton.gameObject.SetActive(!nameIsTooShort());
 			break;
+			case State.SHOWING_HIGH_SCORE:
+			if (Input.GetKeyDown(KeyCode.Return))
+				GoToMenu();
+			break;
 		}
+	}
+
+	void FadeIn () {
+        canvasGroup.alpha += Time.deltaTime;
+        if (canvasGroup.alpha >= 1){
+            canvasGroup.alpha = 1;
+			state = State.WAITING_PLAYER_INPUT;
+		}
+	}
+
+	public void confirmName () {
+        state = State.SHOWING_HIGH_SCORE;
+		firstPart.SetActive(false);
+		secondPart.SetActive(true);
+		secondPart.GetComponent<HighScore>().ShowHighScores(playerName,
+			Player.Instance.GetPlayerScore());
 	}
 
 	bool nameIsTooShort () {
@@ -51,7 +83,7 @@ public class GameOverScreen : Singleton<GameOverScreen> {
 
 	void proccessPlayerInput () {
 		if (Input.GetKeyDown(KeyCode.Return) && !nameIsTooShort() ) {
-			state = State.SHOWING_HIGH_SCORE;
+			confirmName();
 		}
 		if (Input.GetKey(KeyCode.Backspace) && playerName.Length > 0) {
 			SetPlayerName ( playerName.Remove (playerName.Length-1) );
@@ -74,7 +106,7 @@ public class GameOverScreen : Singleton<GameOverScreen> {
 	}
 
 	IEnumerator flashTextCursor () {
-		while (state == State.WAITING_PLAYER_INPUT) {
+		while (true) {
 			showingCursor = false;
             playerNameTextField.text = playerName;
             yield return new WaitForSeconds(.35f);

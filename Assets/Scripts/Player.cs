@@ -28,6 +28,10 @@ public class Player : Singleton<Player> , ILife {
         score = 0;
     }
 
+    public int GetPlayerScore () {
+        return score;
+    }
+
     void updateLife () {
         lifeText.text = "x" + life;
     }
@@ -37,7 +41,7 @@ public class Player : Singleton<Player> , ILife {
     }
 
     public void TakeDamage (int qtd) {
-        if (hasImunity)
+        if (hasImunity || !gameRunning())
             return;
         AudioManager.PlayOneShot(AudioManager.Instance.playerTakesDamage);
         rb.velocity = Vector3.zero;
@@ -48,9 +52,9 @@ public class Player : Singleton<Player> , ILife {
 
     IEnumerator immunity()
     {
+        hasImunity = true; 
         yield return null;
         rb.AddForce( -transform.up * 5, ForceMode2D.Impulse);
-        hasImunity = true;
         for (int i = 0; i < imunityAfterBeingHit * 20; i++)
         {
             gfx.SetActive(!gfx.activeInHierarchy);
@@ -61,7 +65,13 @@ public class Player : Singleton<Player> , ILife {
     }
 
     public void Score (int amount) {
+        if (!gameRunning())
+            return;
         score += amount;
         updateScore ();
+    }
+
+    bool gameRunning () {
+        return GameLoop.state == GameLoop.GameState.RUNNING;
     }
 }
