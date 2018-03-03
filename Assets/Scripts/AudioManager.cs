@@ -22,9 +22,11 @@ public class AudioManager : Singleton<AudioManager> {
 
     public static void PlayOneShot(AudioClip clip)
     {
+		/*
         Instance.audioSources[Instance.audioClipCounter /Instance.clipsPerAudioSource].PlayOneShot (clip);
         Instance.audioClipCounter = (Instance.audioClipCounter + 1) % 
 			(Instance.audioSourcesForFx * Instance.clipsPerAudioSource);
+		*/
     }
 
 }

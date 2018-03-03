@@ -24,6 +24,11 @@ public class PlayerInput : MonoBehaviour {
 	}
 
 	void Update () {
+		if (GameLoop.state != GameLoop.GameState.RUNNING){
+			thrust = rotation = 0;
+			fireButtonPressed = false;
+			return;
+		}
 		thrust =  Mathf.Clamp01 ( Input.GetAxisRaw("Vertical") );
 		rotation = Input.GetAxisRaw("Horizontal");
 		fireButtonPressed = Input.GetButton("Fire1");

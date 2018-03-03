@@ -36,8 +36,10 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void Update () {
-		if (isAlive && Time.time > deathTime)
+		if (isAlive && Time.time > deathTime){
+			init();
 			pool.returnObject(gameObject);
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D col) {

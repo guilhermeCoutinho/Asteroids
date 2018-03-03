@@ -63,4 +63,16 @@ public class CameraBounds : MonoBehaviour {
 		return new Vector2 (randomX,randomY);
 	}
 
+    public static Vector2 getRandomPointInsideBounds (float minimumDistanceFromBounds , float minimumDistanceFromPlayer) {
+        Vector2 candidatePosition;
+        do {
+            candidatePosition = getRandomPointInsideBounds(minimumDistanceFromBounds);
+        }
+        while (pointTooCloseToPlayer(candidatePosition,minimumDistanceFromPlayer));
+        return candidatePosition;
+    }
+
+    static bool pointTooCloseToPlayer (Vector2 point , float minimumDistanceFromPlayer) {
+        return Vector2.Distance(Player.Instance.transform.position,point) < minimumDistanceFromPlayer;
+    }
 }

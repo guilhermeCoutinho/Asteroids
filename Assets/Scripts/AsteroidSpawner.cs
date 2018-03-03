@@ -4,12 +4,11 @@ using UnityEngine;
 
 [RequireComponent(typeof(AsteroidFactory))]
 public class AsteroidSpawner : MonoBehaviour {
-
 	AsteroidFactory asteroidFactory;
 	public float minimumDistanceFromBorders;
+	public float minimumDistanceFromPlayer = 1;
 	public float minimumAsteroidSpawnVelocity = 2;
     public float maxAsteroidSpawnVelocity = 4;
-
 
 	void Awake () {
 		asteroidFactory = GetComponent<AsteroidFactory>();
@@ -18,7 +17,7 @@ public class AsteroidSpawner : MonoBehaviour {
 	public void RandomSpawnAsteroid (int qtd) {
 		for (int i=0;i<qtd;i++)
 			SpawnAsteroid (CameraBounds.getRandomPointInsideBounds
-				(minimumDistanceFromBorders),Asteroid.Size.LARGE);
+				(minimumDistanceFromBorders,minimumDistanceFromPlayer),Asteroid.Size.LARGE);
 	}
 
     public void RandomSpawnAsteroid(int qtd , Vector2 centerPosition , Asteroid.Size size)
@@ -38,16 +37,10 @@ public class AsteroidSpawner : MonoBehaviour {
         asteroid.RotateInDirection(randomRotation);
 	}
 
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space)){
-			RandomSpawnAsteroid (5);
-		}
-	}
-
 	public void OnAsteroidDied (Asteroid.Size size, Vector2 position) {
 		if (size == Asteroid.Size.LARGE)
 			RandomSpawnAsteroid(2,position,Asteroid.Size.MEDIUM);
-        if (size == Asteroid.Size.MEDIUM)
+        else if (size == Asteroid.Size.MEDIUM)
             RandomSpawnAsteroid(4, position, Asteroid.Size.SMALL);
 	}
 }
