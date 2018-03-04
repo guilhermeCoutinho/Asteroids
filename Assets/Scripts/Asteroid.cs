@@ -50,8 +50,6 @@ public class Asteroid : MonoBehaviour , ILife {
 			Die ();
 		}else if (life > 0) {
 			blinkAnimation.Blink ();
-		}else if (life < 0) {
-			Debug.Log ("Life < 0");
 		}
 	}
 

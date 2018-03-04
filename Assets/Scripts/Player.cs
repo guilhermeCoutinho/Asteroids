@@ -8,6 +8,7 @@ public class Player : Singleton<Player> , ILife {
     public GameObject gfx;
     int score;
     bool hasImunity;
+    public bool hasImunityBuff;
     float timeTillImunityRunsOut;
 
     Rigidbody2D rb;
@@ -26,12 +27,16 @@ public class Player : Singleton<Player> , ILife {
 
 
     public void TakeDamage (int qtd) {
-        if (hasImunity || !gameRunning())
+        if (hasImunity || hasImunityBuff || !gameRunning())
             return;
         AudioManager.PlayOneShot(AudioManager.Instance.playerTakesDamage);
         rb.velocity = Vector3.zero;
         StartCoroutine(immunity());
         life -= qtd;
+    }
+
+    public void GetLifeUp () {
+        life ++ ;
     }
 
     IEnumerator immunity()

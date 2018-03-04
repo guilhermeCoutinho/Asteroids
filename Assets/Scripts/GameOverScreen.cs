@@ -35,6 +35,8 @@ public class GameOverScreen : Singleton<GameOverScreen> {
 		firstPart.SetActive(true);
 		secondPart.SetActive(false);
 		SetPlayerName ( playerName = "" );
+		if (flashTextCursorCoroutine!=null)
+			StopCoroutine(flashTextCursorCoroutine);
         flashTextCursorCoroutine = StartCoroutine(flashTextCursor());
 		confirmNameButton.gameObject.SetActive(false);
 		canvasGroup.alpha = 0;
