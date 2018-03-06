@@ -10,13 +10,13 @@ public class ShieldPowerUp : MonoBehaviour , IPowerUp {
     {
         timeToDie = Time.time + duration;
         isActive = true;
-		Player.Instance.hasImunityBuff = true;
+		Player.Instance.immunityBuffCount++;
         Player.Instance.GetComponent<ShieldGfx>().Show(true);
     }
 
     public void Deactivate()
     {
-        Player.Instance.hasImunityBuff = false;
+        Player.Instance.immunityBuffCount--;
         Player.Instance.GetComponent<ShieldGfx>().Show(false);
         Destroy(this);
     }

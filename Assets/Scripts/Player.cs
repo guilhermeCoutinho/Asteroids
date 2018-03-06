@@ -8,7 +8,7 @@ public class Player : Singleton<Player> , ILife {
     public GameObject gfx;
     int score;
     bool hasImunity;
-    public bool hasImunityBuff;
+    public int immunityBuffCount;
     float timeTillImunityRunsOut;
 
     Rigidbody2D rb;
@@ -27,7 +27,7 @@ public class Player : Singleton<Player> , ILife {
 
 
     public void TakeDamage (int qtd) {
-        if (hasImunity || hasImunityBuff || !gameRunning())
+        if (hasImunity || immunityBuffCount > 0 || !gameRunning())
             return;
         AudioManager.PlayOneShot(AudioManager.Instance.playerTakesDamage);
         rb.velocity = Vector3.zero;

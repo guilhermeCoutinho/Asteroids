@@ -22,15 +22,25 @@ public class PlayerInput : MonoBehaviour {
 			return fireButtonPressed;
 		}
 	}
+    bool teleportButtonPressed;
+    public bool TeleportButtonPressed
+    {
+        get
+        {
+            return teleportButtonPressed;
+        }
+    }
 
 	void Update () {
 		if (GameLoop.state != GameLoop.GameState.RUNNING){
 			thrust = rotation = 0;
 			fireButtonPressed = false;
+			teleportButtonPressed = false;
 			return;
 		}
 		thrust =  Mathf.Clamp01 ( Input.GetAxisRaw("Vertical") );
 		rotation = Input.GetAxisRaw("Horizontal");
 		fireButtonPressed = Input.GetButton("Fire1");
+		teleportButtonPressed = Input.GetButtonDown("Jump");
 	}
 }

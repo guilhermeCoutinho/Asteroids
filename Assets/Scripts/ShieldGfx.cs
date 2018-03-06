@@ -6,9 +6,15 @@ public class ShieldGfx : MonoBehaviour {
 
 	public GameObject shieldSprite;
 
+	int activePowerUps = 0;
 
 	public void Show (bool shouldShow) {
-		shieldSprite.SetActive(shouldShow);
+		if (shouldShow)
+			activePowerUps ++;
+		else 
+			activePowerUps --;
+
+		shieldSprite.SetActive(activePowerUps > 0);
 	}
 
 }

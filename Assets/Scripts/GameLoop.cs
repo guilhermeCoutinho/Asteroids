@@ -14,6 +14,7 @@ public class GameLoop : MonoBehaviour {
 	public AsteroidSpawner asteroidSpawner ;
 	public GameOverScreen gameOverScreen;
 	public CollectableSpawner collectableSpawner;
+	public EnemySpawner enemySpawner;
 
 	public int spawnAmount = 1;
 	public int asteroidIncreasePerLevel = 2;
@@ -38,7 +39,7 @@ public class GameLoop : MonoBehaviour {
             }
 			if (levelEnded()){
 				asteroidSpawner.RandomSpawnAsteroid (spawnAmount);
-                collectableSpawner.RandomSpawnPowerups(spawnAmount /2);
+                collectableSpawner.RandomSpawnPowerups((int)Mathf.Log(spawnAmount,2));
 				spawnAmount += asteroidIncreasePerLevel;
 			}
 		}

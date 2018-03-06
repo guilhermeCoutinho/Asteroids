@@ -6,21 +6,19 @@ public class FireRatePowerUp : MonoBehaviour , IPowerUp{
 
 	float timeToDie;
 
-	FireWeapon fireWeaponBeingPoweredUp;
-	float increaseFactor = 3;
+	PlayerWeapon fireWeaponBeingPoweredUp;
+	float increaseFactor = 6;
 	bool isActive = false;
 
 	public void PowerUp (float duration) {
 		timeToDie = Time.time + duration;
 		isActive = true;
-		fireWeaponBeingPoweredUp = GetComponent<FireWeapon>();
-		fireWeaponBeingPoweredUp.alternateFireMode = false;
-		fireWeaponBeingPoweredUp.fireCooldown /= increaseFactor;
+		fireWeaponBeingPoweredUp = GetComponent<PlayerWeapon>();
+		fireWeaponBeingPoweredUp.ActivatePowerUp(increaseFactor);
 	}
 
 	public void Deactivate () {
-		fireWeaponBeingPoweredUp.alternateFireMode = true;
-		fireWeaponBeingPoweredUp.fireCooldown *= increaseFactor;
+		fireWeaponBeingPoweredUp.DeactivatePowerUp (increaseFactor);
 		Destroy(this);
 	}
 

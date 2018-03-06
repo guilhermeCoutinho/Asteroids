@@ -18,8 +18,8 @@ TagManager:
   - Player
   - PlayerShootable
   - Collectable
-  - 
-  - 
+  - EnemyBullet
+  - Enemy
   - 
   - 
   - 
