@@ -40,9 +40,39 @@ public class GameLoop : MonoBehaviour {
 			if (levelEnded()){
 				asteroidSpawner.RandomSpawnAsteroid (spawnAmount);
                 collectableSpawner.RandomSpawnPowerups((int)Mathf.Log(spawnAmount,2));
+                SpawnEnemies();
 				spawnAmount += asteroidIncreasePerLevel;
 			}
 		}
+	}
+
+	void SpawnEnemies () {
+		if (spawnAmount == 1) {
+            enemySpawner.Spawn(EnemySpawner.EnemyType.EASY);
+			return;
+		}if (spawnAmount == 2)
+        {
+            enemySpawner.Spawn(EnemySpawner.EnemyType.HARD);
+            return;
+        }if (spawnAmount == 3)
+        {
+            enemySpawner.Spawn(EnemySpawner.EnemyType.MEDIUM);
+            return;
+        }
+
+
+        for (int i = 0 ; i < Mathf.Log(spawnAmount,2);i++){
+			if (coinToss())
+				enemySpawner.Spawn(EnemySpawner.EnemyType.EASY);
+			else if (coinToss())
+                enemySpawner.Spawn(EnemySpawner.EnemyType.MEDIUM);
+			else
+                enemySpawner.Spawn(EnemySpawner.EnemyType.HARD);
+		}
+	}
+
+	bool coinToss () {
+		return Random.Range(0f,1f) < .5f;
 	}
 
 	bool isPlayerDead () {
@@ -50,6 +80,7 @@ public class GameLoop : MonoBehaviour {
 	}
 
 	bool levelEnded () {
-		return asteroidPool.getActiveObjectCount () == 0;
+		return asteroidPool.getActiveObjectCount () == 0 && 
+			enemySpawner.transform.childCount == 0;
 	}
 }

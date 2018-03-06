@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 50230518492708160}
   - component: {fileID: 61533728122544768}
   - component: {fileID: 114455996713544832}
+  - component: {fileID: 114853534151141706}
   m_Layer: 13
   m_Name: Enemy 3
   m_TagString: Untagged
@@ -215,7 +216,7 @@ MonoBehaviour:
   cannons:
   - {fileID: 4666191167969844}
   - {fileID: 4015884884210304}
-  projectileForce: 9
+  projectileForce: 8
   alternateFireMode: 1
 --- !u!114 &114760564054340362
 MonoBehaviour:
@@ -228,10 +229,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896cbf20b750d294aaf066bd2710ceeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireCooldown: 2
-  shotsPerRound: 4
-  roundInterval: 0.2
+  life: 4
+  pointsForDestroying: 10000
+  fireCooldown: 1
+  shotsPerRound: 5
+  roundInterval: 0.5
   errorMargin: 0
+--- !u!114 &114853534151141706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1725413289649892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b058717950b38734c833f3bde8db8003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 212285450084827426}
 --- !u!114 &114955657081271364
 MonoBehaviour:
   m_ObjectHideFlags: 1

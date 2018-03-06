@@ -334,7 +334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cb2ec660f57394783275d7971cfbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 0}
+  easyEnemy: {fileID: 1530293275560330, guid: d4d185a5c8824514caec93d9d22830a9, type: 2}
+  mediumEnemy: {fileID: 1555618505088140, guid: d4fd37313263474498696fac5f8060c6,
+    type: 2}
+  hardEnemy: {fileID: 1725413289649892, guid: a537bd8d12e192a4f98412fb95e0a110, type: 2}
 --- !u!4 &197242141
 Transform:
   m_ObjectHideFlags: 0
@@ -534,7 +537,7 @@ Prefab:
     - target: {fileID: 114639728354136100, guid: 699caffc10eac984b893a183572a7fe5,
         type: 2}
       propertyPath: fireCooldown
-      value: 0.7
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 114639728354136100, guid: 699caffc10eac984b893a183572a7fe5,
         type: 2}
@@ -544,7 +547,7 @@ Prefab:
     - target: {fileID: 114637859260379678, guid: 699caffc10eac984b893a183572a7fe5,
         type: 2}
       propertyPath: life
-      value: 100
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114862087605772768, guid: 699caffc10eac984b893a183572a7fe5, type: 2}
@@ -1553,8 +1556,9 @@ MonoBehaviour:
   asteroidSpawner: {fileID: 1959356433}
   gameOverScreen: {fileID: 65975151}
   collectableSpawner: {fileID: 1203155243}
+  enemySpawner: {fileID: 197242140}
   spawnAmount: 1
-  asteroidIncreasePerLevel: 2
+  asteroidIncreasePerLevel: 1
 --- !u!1 &1466745342
 GameObject:
   m_ObjectHideFlags: 0
@@ -2125,7 +2129,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1

@@ -36,7 +36,7 @@ public class PlayerWeapon : MonoBehaviour {
 			return;
 
 		if (playerInput.FirebuttonPressed){
-			if (activePowerUps > 0) {
+			if (activePowerUps == 0) {
 				fire (Cannons[canonToFire]);
 				canonToFire = (canonToFire + 1) % Cannons.Length;
 			}else{

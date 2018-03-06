@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 50217680194391186}
   - component: {fileID: 61005222900002428}
   - component: {fileID: 114659831101519976}
+  - component: {fileID: 114466889929632966}
   m_Layer: 13
   m_Name: Enemy 1
   m_TagString: Untagged
@@ -189,6 +190,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2687a30c890bd494d89518adcff81943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114466889929632966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1530293275560330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b058717950b38734c833f3bde8db8003, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 212268557394475796}
 --- !u!114 &114659831101519976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,7 +216,7 @@ MonoBehaviour:
   cannons:
   - {fileID: 4048913189201270}
   - {fileID: 4007356568533616}
-  projectileForce: 5
+  projectileForce: 6
   alternateFireMode: 0
 --- !u!114 &114669901062422384
 MonoBehaviour:
@@ -216,6 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 896cbf20b750d294aaf066bd2710ceeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  life: 5
+  pointsForDestroying: 1000
   fireCooldown: 3
   shotsPerRound: 2
   roundInterval: 0.8
